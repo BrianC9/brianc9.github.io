@@ -1,0 +1,59 @@
+/*Importamos la fuente que queramos utilizar, bien con la herramienta @import o bien en HTML con el link */
+
+@import url("https://fonts.googleapis.com/css2?family=Muli:wght@400;700&display=swap");
+* {
+  box-sizing: border-box; /*Si agregamos cualquier Padding o Border a un elemento o afectará al width del propio elemento*/
+}
+body {
+  font-family: Muli, sans-serif;
+  display: flex; /*Lo hacemos para centrar el contenido, ya que vamos a trabjar con proyectos que queremos que se vean en el centro del viewport*/
+  align-items: center; /*Con flex-direction: column; los coloca verticalmente, y con align-items: center; los centramos en el viewport*/
+  justify-content: center; /* Para situar el contenido en el medio del viewport, vertical y horizontalmente */
+  height: 100vh; /* Si no le damos una altura al body, no los podrá centrar en el medio, ya que neceista unas referencias*/
+  overflow: hidden; /*No nos muestra la escrollbar lateral */
+  margin: 0; /*Utilizamos todo el espacio dispnible*/
+}
+.container {
+  display: flex; /*Lo dejamos en su orientación horizontal ya que es lo que nos interesa para ver los paneles*/
+  width: 90vw; /*si dividimos el width en 100 partes, con esto cogemos 90 de ellas */
+}
+
+.panel {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 70vh;
+  border-radius: 50px;
+  color: aliceblue;
+  cursor: pointer;
+  flex: 0.5;
+  margin: 10px;
+  position: relative;
+  transition: flex 0.8s ease-out; /*Cuando el panel cambie a active, no queremos que, unicamente, cambie el tamaño, sino que queremos una transición*/
+}
+.panel h3 {
+  font-size: 1.5em;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  margin: 0;
+  opacity: 0;
+}
+.panel.active {
+  flex: 5;
+}
+.panel.active h3 {
+  opacity: 1;
+  transition: opacity 0.4s ease-in; /*Haremos una transicion para que no aparezca el texto hasta que se haya desplegado el panel */
+}
+@media (max-width: 480px) {
+  /* Para hacerlo repsonsive*/ /* Cualquier regla que quiera aplicar solo lo hará cuando la pantalla sea menor de 480px de ancho */
+  .container {
+    width: 100vw; /*Para escritorio cogíamos 90vw, para dispostivos más pequeños ocuparemos los 100vw*/
+  }
+  .panel:nth-of-type(4),
+  .panel:nth-of-type(5) {
+    /*Esto lo que hace es seleccionar los paneles .panel en el orden 4 y 5*/ /*Vamos a quitar los útlimos dos paneles, ya que estamos en dispositivos más pequeños*/
+    display: none;
+  }
+}
